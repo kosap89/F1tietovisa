@@ -43,7 +43,7 @@ app.get('/questions', (req, res) => {
     });
   });
 
-  // Tallentaa käyttäjän vastauksen
+  //tallentaa käyttäjän vastauksen
 app.post('/answer', (req, res) => {
     const { question_id, user_answer } = req.body;
     connection.query('INSERT INTO answers (question_id, user_answer) VALUES (?, ?)', [question_id, user_answer], (error) => {
@@ -56,7 +56,7 @@ app.post('/answer', (req, res) => {
     });
   });
   
-  // Mahdollistaa uusien kysymysten lisäämisen
+  //mahdollistaa uusien kysymysten lisäämisen
   app.post('/questions', (req, res) => {
     const { question, correct_answer } = req.body;
     connection.query('INSERT INTO questions (question, correct_answer) VALUES (?, ?)', [question, correct_answer], (error) => {
@@ -69,4 +69,20 @@ app.post('/answer', (req, res) => {
     });
   });
 
-  
+  /* Tietokannan luonti lauseet  
+  CREATE DATABASE f1_trivia;
+
+  USE f1_trivia;
+
+  CREATE TABLE questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question TEXT,
+    correct_answer TEXT
+  );
+
+  CREATE TABLE answers (
+    question_id INT,
+    user_answer TEXT,
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+  );
+  */
